@@ -7,9 +7,11 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
 
+  const userId = clerkUser.emailAddresses[0].emailAddress;
+
   const room = await getDocument({
     roomId: id,
-    userId: clerkUser.emailAddresses[0].emailAddress,
+    userId,
   });
 
   if (!room) redirect("/"); // TODO - Unauthorized page
@@ -18,7 +20,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
 
   return (
     <main className="flex w-full flex-col items-center">
-      <DocRoom roomId={id} roomMetadata={room.metadata} />
+      <DocRoom roomId={id} roomMetadata={room.metadata} userId={userId} />
     </main>
   );
 };

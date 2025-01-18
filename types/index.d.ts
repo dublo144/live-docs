@@ -25,6 +25,7 @@ declare type DocRoomMetadata = {
 declare type DocRoomProps = {
   roomId: string;
   roomMetadata: DocRoomMetadata;
+  userId: string;
   users: User[];
   currentUserType: UserType;
 };

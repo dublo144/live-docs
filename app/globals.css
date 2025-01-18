@@ -111,7 +111,7 @@
   }
 
   .document-title-input {
-    @apply min-w-[78px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center !important;
+    @apply min-w-[78px] border-[#0f1c34] border-2 hover:border-slate-700 focus:border-gray-400 bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-white disabled:border-none disabled:cursor-default disabled:opacity-100 sm:text-xl md:text-center !important;
   }
 
   .document-title {
