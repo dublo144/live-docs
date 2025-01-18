@@ -1,11 +1,12 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-const Header = ({ children }: HeaderProps) => {
+const Header = ({ children, className }: HeaderProps) => {
   return (
-    <div className="header">
+    <div className={cn(className, "header")}>
       <Link href={"/"} className="md:flex-1">
         <Image
           src={"/assets/icons/logo.svg"}

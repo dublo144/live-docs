@@ -14,5 +14,10 @@ declare type DocRoomMetadata = {
 
 declare type CreateDocumentParams = {
   userId: string;
-  email: string;
+  userEmail: string;
+};
+
+declare type NewDocumentBtnProps = {
+  userId: string;
+  userEmail: string;
 };
