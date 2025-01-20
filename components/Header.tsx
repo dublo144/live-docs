@@ -1,13 +1,14 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
 const Header = ({ children, className }: HeaderProps) => {
   return (
     <div className={cn(className, "header")}>
-      <Link href={"/"} className="md:flex-1">
+      <Link href={"/"}>
         <Image
           src={"/assets/icons/logo.svg"}
           alt="logo"
@@ -23,7 +24,18 @@ const Header = ({ children, className }: HeaderProps) => {
           className="mr-2 md:hidden"
         />
       </Link>
+
       {children}
+
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <div className="flex items-center gap-2 lg:gap-4">
+          Notifications
+          <UserButton />
+        </div>
+      </SignedIn>
     </div>
   );
 };

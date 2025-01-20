@@ -1,6 +1,6 @@
 // Header
 declare type HeaderProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 

@@ -1,19 +1,21 @@
 "use client";
 
 import { updateDocument } from "@/lib/actions/room.actions";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react";
 import { useState } from "react";
-import ActiveCollaborators from "./ActiveCollaborators";
 import { Editor } from "./editor/Editor";
 import Header from "./Header";
 import Loader from "./Loader";
 import { Input } from "./ui/input";
 
-const DocRoom = ({ roomId, roomMetadata, userId }: DocRoomProps) => {
+const DocRoom = ({
+  roomId,
+  roomMetadata,
+  users,
+  currentUserType,
+  userId,
+}: DocRoomProps) => {
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
-
-  const currentUserAccess = "editor";
 
   const updateTitle = async (title: string) => {
     try {
@@ -32,9 +34,9 @@ const DocRoom = ({ roomId, roomMetadata, userId }: DocRoomProps) => {
       <ClientSideSuspense fallback={<Loader />}>
         <div className="doc-room">
           <Header>
-            <div className="flex w-fit items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2">
               <Input
-                disabled={currentUserAccess !== "editor"}
+                disabled={currentUserType !== "editor"}
                 type="text"
                 className="document-title-input"
                 value={documentTitle}
@@ -49,17 +51,8 @@ const DocRoom = ({ roomId, roomMetadata, userId }: DocRoomProps) => {
                 }}
               />
             </div>
-            <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
-              <ActiveCollaborators />
-            </div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
           </Header>
-          <Editor />
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
